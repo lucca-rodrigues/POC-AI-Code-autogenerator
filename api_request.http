@@ -9,3 +9,12 @@ Content-Type: application/json
 {
   "prompt": "Crie uma API Node com Express e typescript para simular um adquirente de cartão de crédito. Deve ter Crud de cartões de crédito, deve ter o crud para transacionamento com o cartão de crédito."
 }
+
+
+###
+POST http://localhost:3000/generate
+Content-Type: application/json
+
+{
+  "prompt": "Crie uma extensão para vscode que é um chat que interage com uma IA via API."
+}

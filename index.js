@@ -2,21 +2,19 @@ import { ChatOpenAI } from "@langchain/openai";
 import { ChatGroq } from "@langchain/groq";
 import fs from "fs-extra";
 import path from "path";
-import dotenv from "dotenv";
 import { ProjectStructureTool, FileContentTool, ValidationTool, WebScrapingTool, SerperTool } from "./tools/index.js";
-
-dotenv.config();
+import { envsProxy } from "./utils/envsProxy.js";
 
 const llm = new ChatOpenAI({
   modelName: "gpt-4o-mini",
   temperature: 0.7,
-  openAIApiKey: process.env.OPENAI_API_KEY,
+  openAIApiKey: envsProxy.OPENAI_API_KEY,
 });
 
 // const llm = new ChatGroq({
 //   modelName: "llama3-8b-8192",
 //   temperature: 0.7,
-//   groqApiKey: process.env.GROQ_API_KEY,
+//   groqApiKey: envsProxy.GROQ_API_KEY,
 // });
 
 async function createFile(filePath, content) {
@@ -40,7 +38,7 @@ export async function generateProject(userPrompt) {
       new FileContentTool(llm),
       new ValidationTool(llm),
       new WebScrapingTool(),
-      new SerperTool(process.env.SERPER_API_KEY),
+      new SerperTool(envsProxy.SERPER_API_KEY),
     ];
 
     // Buscar informações atualizadas usando Serper
