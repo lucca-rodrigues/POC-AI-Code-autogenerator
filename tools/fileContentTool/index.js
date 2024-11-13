@@ -24,16 +24,13 @@ export class FileContentTool extends Tool {
                       7. Implemente tratamento de erros
                       8. Siga princípios SOLID
                       9. Inclua validações necessárias
+                      10. Se receber uma lista de instruções, implemente-as no código
 
                       Importante:
+                      - SEMPRE retorne código fonte executável
+                      - NÃO retorne listas de instruções ou sugestões
                       - NÃO inclua comentários sobre o que deveria ser feito
-                      - NÃO liste melhorias ou sugestões
-                      - APENAS gere o código fonte funcional
-                      - Se for um controller ou service, implemente todos os métodos CRUD
-                      - Se for um modelo, inclua todas as propriedades e validações
-                      - Se for um middleware, implemente a lógica completa
-
-                      Retorne apenas o código fonte, sem explicações ou markdown.`;
+                      - Retorne apenas o código fonte funcional`;
 
       const result = await this.llm.invoke(prompt);
 

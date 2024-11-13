@@ -1,4 +1,4 @@
-// import { ChatOpenAI } from "@langchain/openai";
+import { ChatOpenAI } from "@langchain/openai";
 import { ChatGroq } from "@langchain/groq";
 import fs from "fs-extra";
 import path from "path";
@@ -7,17 +7,17 @@ import { ProjectStructureTool, FileContentTool, ValidationTool, WebScrapingTool,
 
 dotenv.config();
 
-// const llm = new ChatOpenAI({
-//   modelName: "gpt-4o-mini",
-//   temperature: 0.7,
-//   openAIApiKey: process.env.OPENAI_API_KEY,
-// });
-
-const llm = new ChatGroq({
-  modelName: "llama3-8b-8192",
+const llm = new ChatOpenAI({
+  modelName: "gpt-4o-mini",
   temperature: 0.7,
-  groqApiKey: process.env.GROQ_API_KEY,
+  openAIApiKey: process.env.OPENAI_API_KEY,
 });
+
+// const llm = new ChatGroq({
+//   modelName: "llama3-8b-8192",
+//   temperature: 0.7,
+//   groqApiKey: process.env.GROQ_API_KEY,
+// });
 
 async function createFile(filePath, content) {
   console.log(`📂 Verificando/criando caminho para: ${filePath}`);

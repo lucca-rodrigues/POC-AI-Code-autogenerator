@@ -15,15 +15,23 @@ export class ValidationTool extends Tool {
     try {
       const { fileName, content } = JSON.parse(input);
 
-      const prompt = `Analise o seguinte conteúdo do arquivo ${fileName} e identifique erros ou melhorias:
+      const prompt = `Analise o seguinte conteúdo do arquivo ${fileName}:
       
-      Conteúdo:
       ${content}
 
-      Se houver problemas, retorne "Correção sugerida:" seguido das correções.
-      Caso contrário, retorne "OK".
+      Se o conteúdo for uma lista de instruções ao invés de código fonte real:
+      1. Gere o código fonte completo implementando todas as instruções
+      2. Retorne "Correção sugerida:" seguido do código fonte completo
+      
+      Se for código fonte válido:
+      1. Analise problemas e melhorias necessárias
+      2. Se houver problemas, retorne "Correção sugerida:" seguido do código corrigido
+      3. Se estiver OK, retorne "OK"
 
-      Importante: Retorne apenas o texto da correção ou "OK", sem formatação markdown ou explicações adicionais.`;
+      Importante: 
+      - Se for uma lista de instruções, SEMPRE gere o código fonte completo
+      - Retorne apenas o texto da correção ou "OK", sem formatação markdown
+      - Inclua todas as importações necessárias`;
 
       const result = await this.llm.invoke(prompt);
 
