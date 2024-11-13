@@ -2,7 +2,7 @@ import { ChatOpenAI } from "@langchain/openai";
 import { ChatGroq } from "@langchain/groq";
 import fs from "fs-extra";
 import path from "path";
-import { ProjectStructureTool, FileContentTool, ValidationTool, WebScrapingTool, SerperTool } from "./tools/index.js";
+import { ProjectStructureTool, FileContentTool, ValidationTool, WebScrapingTool, SerperTool, DependencyInstallerTool } from "./tools/index.js";
 import { envsProxy } from "./utils/envsProxy.js";
 
 const llm = new ChatOpenAI({
@@ -39,6 +39,7 @@ export async function generateProject(userPrompt) {
       new ValidationTool(llm),
       new WebScrapingTool(),
       new SerperTool(envsProxy.SERPER_API_KEY),
+      new DependencyInstallerTool(),
     ];
 
     // Buscar informações atualizadas usando Serper
@@ -184,6 +185,16 @@ export async function generateProject(userPrompt) {
     console.log(`📦 Dependências necessárias:`, projectStructure.dependencias);
     console.log(`⚡ Comandos disponíveis:`, projectStructure.comandos);
     console.log(`📂 Caminho do projeto: ${resultPath}\n`);
+
+    // Instalar dependências
+    console.log("\n📦 Instalando dependências do projeto...");
+    const dependencyInstaller = tools[5];
+    await dependencyInstaller._call(
+      JSON.stringify({
+        resultPath,
+        dependencies: projectStructure.dependencias,
+      })
+    );
 
     return {
       message: "Projeto gerado com sucesso e validado!",
