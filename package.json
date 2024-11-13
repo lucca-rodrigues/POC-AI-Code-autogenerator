@@ -1,0 +1,31 @@
+{
+  "name": "code-autogenerator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "commit": "git add . && git-cz && git push"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@langchain/community": "^0.0.34",
+    "@langchain/core": "^0.1.41",
+    "@langchain/groq": "^0.1.2",
+    "@langchain/openai": "^0.0.14",
+    "axios": "^1.6.7",
+    "cheerio": "^1.0.0-rc.12",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "fs-extra": "^11.2.0",
+    "git-cz": "^4.9.0",
+    "langchain": "^0.1.28"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
