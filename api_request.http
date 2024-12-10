@@ -18,3 +18,12 @@ Content-Type: application/json
 {
   "prompt": "Crie uma extensão para vscode que é um chat que interage com uma IA via API."
 }
+
+
+###
+POST http://localhost:3000/generate
+Content-Type: application/json
+
+{
+  "prompt": "Crie uma interface com React, Vite e Tailwind Css que seja parecido com o bolt.new. Deve ter  a área de prompt inicial, área de chat e integração com webcontainers"
+}
